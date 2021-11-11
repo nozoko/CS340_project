@@ -1,0 +1,84 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p.about {
+    text-align: center;
+
+}
+
+#menu {
+    margin:5px;
+    width:50%;
+    font-family: sans-serif;
+}
+#menu li {
+    display:block;
+    width:120px;
+    float:left;
+    margin-left:2px;
+    align-content: center;
+}
+
+#menu a {
+    display:block;
+    padding:3px;
+    text-decoration:none;
+    background-color:#fff;
+    color: #000000;
+}
+
+#mainHeader {
+    text-align: center;
+}
+
+#menu a:hover {
+    background-color:#000000;
+    color:#fff;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 2px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+td {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
+button {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+table tr td:nth-last-child(1){
+    border: 0;
+}
+table tr td:nth-last-child(2){
+    border: 0;
+}
+
+.addbtn:hover{
+    background-color: #b8ffb8;
+}
+
+.editbtn:hover{
+    background-color: #b8ffb8;
+}
+
+.removebtn:hover{
+    background-color: #b8ffb8;
+}
