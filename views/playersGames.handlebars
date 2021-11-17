@@ -1,0 +1,20 @@
+<html>
+<h3>Player Game Libraries</h3>
+<table>
+    <thead>
+    <th>Player ID</th>
+    <th>Game ID</th>
+    </thead>
+    <tbody>
+    {{#each playersAndGames}}
+        <tr>
+            <td>{{playerID}}</td>
+            <td>{{gameID}}</td>
+            <td><button onclick="deleteEntry({{playerID}})">Delete</button></td>
+            <td><a href="/playersGames/{{playerID}}">Update</a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+</html>
