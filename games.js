@@ -16,7 +16,7 @@ module.exports = function() {
 
     function getPlayers(res, mysql, context, complete) {
         mysql.pool.query("SELECT Games.gameID as gameID, title, genre, Publishers.publisherName AS publisher FROM Games " +
-            "INNER JOIN Publishers ON publisher = Publishers.publisherID", function (error, results, fields) {
+            "INNER JOIN Publishers ON publishers = Publishers.publisherID", function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.send();
