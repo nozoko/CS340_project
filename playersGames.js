@@ -4,7 +4,7 @@ module.exports = function() {
     var router = express.Router();
 
     function getplayersGames(res, mysql, context, complete) {
-        mysql.pool.query("SELECT playerID, gameID FROM playersGames ", function (error, results, fields) {
+        mysql.pool.query("SELECT playerID, gameID FROM PlayersGames ", function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.send();
@@ -21,7 +21,7 @@ module.exports = function() {
         getplayersGames(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 2) {
+            if (callbackCount >= 1) {
                 res.render('playersGames', context);
             }
         }
