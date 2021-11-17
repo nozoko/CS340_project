@@ -21,6 +21,7 @@ app.set('port', 6955);
 app.set('mysql', mysql);
 app.use('/players', require('./players.js'));
 app.use('/games', require('./games.js'));
+app.use('/playersGames', require('./playersGames.js'));
 app.use('/', express.static('public'));
 
 app.use(function(req,res){
