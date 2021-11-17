@@ -1,0 +1,35 @@
+<html>
+<h3>Games</h3>
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Genre</th>
+    <th>Publisher</th>
+    </thead>
+    <tbody>
+    {{#each games}}
+        <tr>
+            <td>{{gameID}}</td>
+            <td>{{title}}</td>
+            <td>{{genre}}</td>
+            <td>{{publisher}}</td>
+            <td><button onclick="deleteGame({{gameID}})">Delete</button></td>
+            <td><a href="/players/{{gameID}}">Update</a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<form id="addGame" action="/games" method="post">
+    title: <input type="text" name="title"><br>
+    genre: <input type="text" name="genre"><br>
+    publisher: <select name="publisher">
+    {{#each publisher}}
+        <option value="{{publisherID}}">{{publisherName}}</option>
+    {{/each}}
+</select><br>
+    <input type="submit" value="Submit">
+</form>
+
+</html>
