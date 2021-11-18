@@ -43,7 +43,7 @@ module.exports = function() {
     router.post('/', function(req, res){
         console.log(req.body)
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Games (title, genre, publisher) VALUES (?,?,?)";
+        var sql = "INSERT INTO Games (title, genre, publishers) VALUES (?,?,?)";
         var inserts = [req.body.title, req.body.genre, req.body.publisher];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
