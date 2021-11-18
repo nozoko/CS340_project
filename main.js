@@ -24,6 +24,10 @@ app.use('/games', require('./games.js'));
 app.use('/playersGames', require('./playersGames.js'));
 app.use('/', express.static('public'));
 
+app.get('/',function(req,res){
+    res.render('homepage.handlebars');
+});
+
 app.use(function(req,res){
     res.status(404);
     res.render('404');
