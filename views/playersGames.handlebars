@@ -17,4 +17,17 @@
     </tbody>
 </table>
 
+<form id="addPlayersGame" action="/playersGames" method="post">
+    Gamertag: <select name="gamerTag">
+    {{#each gamerTags}}
+        <option value="{{playerID}}">{{gamerTag}}</option>
+    {{/each}}
+    Title: <select name="employer">
+    {{#each titles}}
+        <option value="{{gameID}}">{{title}}</option>
+    {{/each}}
+</select><br>
+    <input type="submit" value="Submit">
+</form>
+
 </html>
