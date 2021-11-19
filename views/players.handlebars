@@ -1,7 +1,12 @@
 <html>
 <h3>Players</h3><br>
 
-Search by Gamertag: <input type="text" name="playerSearch"><br>
+<form id='search_player' action='' method=''>
+    <label> Search player by Gamertag:</label>
+    <input id='playersGamertag' type='text' name='playersGamertag' value=''>
+    <input type="button" value="Search" onclick="searchPlayer()">
+</form>
+
 <table>
     <thead>
     <th>ID</th>
