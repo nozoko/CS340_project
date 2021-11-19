@@ -14,7 +14,7 @@ module.exports = function() {
         });
     }
 
-    function getGames(res, mysql, context, complete) {
+    function getGames(req, res, mysql, context, complete) {
       // Method for generating dynamic sql queries inspired by https://stackoverflow.com/questions/57185699/node-js-express-form-sql-select-query-based-on-supplied-parameters?noredirect=1&lq=1
         const searches = [];
         const searchVals = [];
@@ -41,7 +41,7 @@ module.exports = function() {
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');
-        getGames(res, mysql, context, complete);
+        getGames(req, res, mysql, context, complete);
         getPublishers(res, mysql, context, complete);
         function complete() {
             callbackCount++;
