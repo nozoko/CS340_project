@@ -45,6 +45,7 @@ module.exports = function() {
     router.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
+        context.jsscripts = ["searchPlayer.js"];
         var mysql = req.app.get('mysql');
         getPlayers(res, mysql, context, complete);
         getPublishers(res, mysql, context, complete);
