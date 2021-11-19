@@ -1,0 +1,19 @@
+<html lang="en">
+<h3>Add Platform</h3>
+<form id="addPlatform" action="/platforms/add" method="post">
+            name: <input type="text" name="systemName"><br>
+            manufacturer: <input type="text" name="manufacturer"><br>
+            launch year: <input type="date" name="launchYear"><br>
+            games: <select name="games">
+            {{#each games}}
+                <option value="{{gameID}}">{{title}}</option>
+            {{/each}}
+</select><br>
+            <input type="submit" value="Submit">
+</form>
+
+<br>
+<p>Functionality for adding relationships between games and platforms through this menu not yet implemented</p>
+
+</body>
+</html>
