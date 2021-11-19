@@ -29,7 +29,7 @@ module.exports = function() {
     function getPlayerByGamertag(req, res, mysql, context, complete) {
         //sanitize the input as well as include the % character
         var query = "SELECT Players.playerID as playerID, email, firstName, lastName, gamerTag, Publishers.publisherName AS employer FROM Players " +
-        "INNER JOIN Publishers ON employer = Publishers.publisherID WHERE Players.gamerTag LIKE " + mysql.pool.escape(req.params.s + '%');
+        "LEFT JOIN Publishers ON employer = Publishers.publisherID WHERE Players.gamerTag LIKE " + mysql.pool.escape(req.params.s + '%');
         console.log(query)
 
         mysql.pool.query(query, function(error, results, fields){
