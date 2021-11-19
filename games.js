@@ -15,8 +15,19 @@ module.exports = function() {
     }
 
     function getGames(res, mysql, context, complete) {
-        mysql.pool.query("SELECT Games.gameID as gameID, title, genre, Publishers.publisherName AS publisher FROM Games " +
-            "INNER JOIN Publishers ON publishers = Publishers.publisherID", function (error, results, fields) {
+      // Method for generating dynamic sql queries inspired by https://stackoverflow.com/questions/57185699/node-js-express-form-sql-select-query-based-on-supplied-parameters?noredirect=1&lq=1
+        const searches = [];
+        const searchVals = [];
+        if (req.query.id) { searches.push("gameID=?"); searchVals.push(req.query.id); }
+        if (req.query.title) { searches.push("title=?"); searchVals.push(req.query.title); }
+        if (req.query.genre) { searches.push("genre=?"); searchVals.push(req.query.genre); }
+        if (req.query.publisher) { searches.push("publishers=?"); searchVals.push(req.query.publisher); }
+        
+        var sql = "SELECT Games.gameID as gameID, title, genre, Publishers.publisherName AS publisher FROM Games " +
+        "INNER JOIN Publishers ON publishers = Publishers.publisherID " + 
+        (searches.length ? ("WHERE " + searches.join(" AND ")) : "");
+        
+        mysql.pool.query(sql, searchVals, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.send();

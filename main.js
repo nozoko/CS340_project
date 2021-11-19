@@ -22,6 +22,8 @@ app.set('mysql', mysql);
 app.use('/players', require('./players.js'));
 app.use('/games', require('./games.js'));
 app.use('/playersGames', require('./playersGames.js'));
+app.use('/platforms', require('./platforms.js'));
+app.use('/publishers', require('./publishers.js'));
 app.use('/', express.static('public'));
 
 app.get('/',function(req,res){

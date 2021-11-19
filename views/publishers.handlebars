@@ -1,0 +1,50 @@
+<html>
+    <h3>Publishers Table</h3>
+    <table>
+        <thead>
+            <th>Search</th>
+        </thead>
+		<tbody>
+			<tr>
+				<td><input type="text" name="searchName" size="10" value=""></td>
+				<td><input type="text" name="searchHQ" size="10" value=""></td>
+				<td><select id="games-multi-select" multiple>
+					<option value="" selected>Select Games</option>
+					{{#each games}}
+					<option value="{{gameID}}">{{title}}</option>
+					{{/each}}
+				</select></td>
+				<td><select id="employees-multi-select" multiple>
+					<option value="" selected>Select Employees</option>
+					{{#each players}}
+					<option value="{{playerID}}">{{firstName}}</option>
+					{{/each}}
+				</select></td>
+				<td><button class="searchbtn" title="click to search with given fields">Search</button></td>
+			</tr>
+		</tbody>
+    </table>
+    <br>
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Headquarters</th>
+            <th>Published Games</th>
+            <th>Employees</th>
+        </thead>
+		<tbody>
+		{{#each publishers}}
+			<tr>
+				<td>{{publisherName}}</td>
+				<td>{{headquarters}}</td>
+				<td><a href="/games">see games</a></td>
+				<td><a href="/players">see employees</a></td>
+				<td><button class="editbtn" title="click to edit entry" onclick="location.href='/publishers/edit?publisher={{publisherID}}';">edit</button></td>
+				<td><button class="removebtn" title="click to remove entry"  onclick="location.href='/publishers/delete?publisher={{publisherID}}';">remove</button></td>
+			</tr>
+		{{/each}}
+		</tbody>
+    </table>
+    <br>
+    <button class="addbtn" onclick="location.href='/publishers/add';" title="click to add entry">add</button>
+</html>

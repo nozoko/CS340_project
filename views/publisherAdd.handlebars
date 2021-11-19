@@ -1,0 +1,25 @@
+<html>
+<h3>Add Publisher</h3>
+<form id="addPublisher" action="/publishers/add" method="post">
+            name: <input type="text" name="publisherName"><br>
+			headquarters: <input type="text" name="headquarters"><br>
+            games: <select name="games">
+				<option value="" selected>Select Games</option>
+				{{#each games}}
+                <option value="{{gameID}}">{{title}}</option>
+				{{/each}}
+			employees: <select id="employees-multi-select" multiple>
+				<option value="" selected>Select Employees</option>
+				{{#each players}}
+				<option value="{{playerID}}">{{firstName}}</option>
+				{{/each}}
+			</select></td>
+</select><br>
+            <input type="submit" value="Submit">
+</form>
+
+<br>
+<p>Functionality for adding relationships between games and platforms through this menu not yet implemented</p>
+
+</body>
+</html>
