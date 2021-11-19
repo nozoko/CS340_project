@@ -16,7 +16,7 @@ module.exports = function() {
 
     function getPlayers(res, mysql, context, complete) {
         mysql.pool.query("SELECT Players.playerID as playerID, email, firstName, lastName, gamerTag, Publishers.publisherName AS employer FROM Players " +
-            "LEFT JOIN Publishers ON employer = Publishers.publisherID", function (error, results, fields) {
+            "INNER JOIN Publishers ON employer = Publishers.publisherID", function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.send();
@@ -24,6 +24,22 @@ module.exports = function() {
             context.players = results;
             complete();
         })
+    }
+
+    function getPlayerByGamertag(req, res, mysql, context, complete) {
+        //sanitize the input as well as include the % character
+        var query = "SELECT Players.playerID as playerID, email, firstName, lastName, gamerTag, Publishers.publisherName AS employer FROM Players " +
+        "INNER JOIN Publishers ON employer = Publishers.publisherID WHERE Players.gamerTag LIKE " + mysql.pool.escape(req.params.s + '%');
+        console.log(query)
+
+        mysql.pool.query(query, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.players = results;
+            complete();
+        });
     }
 
     router.get('/', function (req, res, next) {
@@ -54,6 +70,21 @@ module.exports = function() {
                 res.redirect('/players');
             }
         });
+    });
+
+    router.get('/search/:s', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["searchPlayer.js"];
+        var mysql = req.app.get('mysql');
+        getPlayerByGamertag(req, res, mysql, context, complete);
+        getPublishers(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('players', context);
+            }
+        }
     });
 
     return router;
