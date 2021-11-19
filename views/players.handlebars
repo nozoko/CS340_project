@@ -1,5 +1,7 @@
 <html>
-<h3>Players</h3>
+<h3>Players</h3><br>
+
+Search by Gamertag: <input type="text" name="email"><br>
 <table>
     <thead>
     <th>ID</th>
@@ -26,11 +28,11 @@
 </table>
 
 <form id="addPlayer" action="/players" method="post">
-            email: <input type="text" name="email"><br>
-            firstName: <input type="text" name="firstName"><br>
-            lastName: <input type="text" name="lastName"><br>
-            gamerTag: <input type="text" name="gamerTag"><br>
-            employer: <select name="employer">
+            Email: <input type="text" name="email"><br>
+            First Name: <input type="text" name="firstName"><br>
+            Last Name: <input type="text" name="lastName"><br>
+            Gamertag: <input type="text" name="gamerTag"><br>
+            Employer: <select name="employer">
             {{#each employer}}
                 <option value="{{publisherID}}">{{publisherName}}</option>
             {{/each}}
