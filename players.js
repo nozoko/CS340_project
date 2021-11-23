@@ -45,7 +45,7 @@ module.exports = function() {
     router.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["searchPlayer.js"];
+        context.jsscripts = ["deleteplayer.js","searchPlayer.js"];
         var mysql = req.app.get('mysql');
         getPlayers(res, mysql, context, complete);
         getPublishers(res, mysql, context, complete);
@@ -76,7 +76,7 @@ module.exports = function() {
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["searchPlayer.js"];
+        context.jsscripts = ["deleteplayer.js","searchPlayer.js"];
         var mysql = req.app.get('mysql');
         getPlayerByGamertag(req, res, mysql, context, complete);
         getPublishers(res, mysql, context, complete);
