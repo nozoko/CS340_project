@@ -88,7 +88,24 @@ module.exports = function() {
         }
     });
 
+    router.delete('/:playerID', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Players WHERE playerID = ?";
+        var inserts = [req.params.playerID];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        })
+    })    
+    
     return router;
+    
 }();
 
 
