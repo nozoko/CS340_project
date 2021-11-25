@@ -1,0 +1,16 @@
+<html>
+<h1>Update {{players.firstName}} {{players.lastName}}:</h1>
+<form id="update-person" action="/players" method="post">
+    Email: <input type="text" name="email" value="{{players.email}}"><br>
+    First Name: <input type="text" name="firstName" value="{{players.firstName}}"><br>
+    Last Name: <input type="text" name="lastName" value="{{players.lastName}}"><br>
+    Gamertag: <input type="text" name="gamerTag" value="{{players.gamerTag}}"><br>
+    Employer: <select name="employer" id="employer-selector">
+    {{#each employer}}
+        <option value="{{publisherID}}">{{publisherName}}</option>
+    {{/each}}
+</select><br>
+</form>
+<button onclick="updatePlayer({{players.playerID}})">Update</button>
+<script defer>selectPlanet({{person.homeworld}});</script>
+</html>
