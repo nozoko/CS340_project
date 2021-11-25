@@ -87,7 +87,41 @@ module.exports = function() {
             }
         }
     });
+    
+    router.get('/:playerID', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updateplayer.js","deleteplayer.js","searchPlayer.js"];
+        var mysql = req.app.get('mysql');
+        getPlayers(res, mysql, context, req.params.playerID, complete);
+        getPublishers(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('update-player', context);
+            }
 
+        }
+    });
+
+    router.put('/:playerID', function(req, res){
+        var mysql = req.app.get('mysql');
+        console.log(req.body)
+        console.log(req.params.id)
+        var sql = "UPDATE Players SET email=?, firstName=?, lastName=?, gamerTag=?, employer=? WHERE playerID=?";
+        var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.gamerTag, req.body.employer, req.params.playerID];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
+    
     router.delete('/:playerID', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Players WHERE playerID = ?";
