@@ -36,6 +36,19 @@ module.exports = function() {
             complete();
         })
     }
+    
+    function getGame(res, mysql, context, gameID, complete){
+        var sql = "SELECT gameID, title, genre, publishers FROM Games WHERE gameID = ?";
+        var inserts = [gameID];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.game = results[0];
+            complete();
+        });
+    }    
 
     router.get('/', function (req, res, next) {
         var callbackCount = 0;
