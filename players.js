@@ -26,6 +26,19 @@ module.exports = function() {
         })
     }
 
+    function getPlayer(res, mysql, context, playerID, complete){
+        var sql = "SELECT playerID as playerID, email, firstName, lastName, gamerTag, employer FROM Players WHERE playerID = ?";
+        var inserts = [playerID];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.player = results[0];
+            complete();
+        });
+    }    
+    
     function getPlayerByGamertag(req, res, mysql, context, complete) {
         //sanitize the input as well as include the % character
         var query = "SELECT Players.playerID as playerID, email, firstName, lastName, gamerTag, Publishers.publisherName AS employer FROM Players " +
@@ -93,7 +106,7 @@ module.exports = function() {
         var context = {};
         context.jsscripts = ["updateplayer.js","deleteplayer.js","searchPlayer.js"];
         var mysql = req.app.get('mysql');
-        getPlayers(res, mysql, context, req.params.playerID, complete);
+        getPlayer(res, mysql, context, req.params.playerID, complete);
         getPublishers(res, mysql, context, complete);
         function complete(){
             callbackCount++;
