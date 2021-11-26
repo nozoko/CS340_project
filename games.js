@@ -40,6 +40,7 @@ module.exports = function() {
     router.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
+        context.jsscripts = ["deletegame.js","searchgame.js"];
         var mysql = req.app.get('mysql');
         getGames(req, res, mysql, context, complete);
         getPublishers(res, mysql, context, complete);
@@ -66,6 +67,59 @@ module.exports = function() {
             }
         });
     });
+ 
+    //route for the update game entry page
+    router.get('/:gameID', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updategame.js","searchgame.js"];
+        var mysql = req.app.get('mysql');
+        getGame(res, mysql, context, req.params.gameID, complete);
+        getPublishers(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('update-game', context);
+            }
+
+        }
+    });    
+    
+    //updates a game entry
+    router.put('/:gameID', function(req, res){
+        var mysql = req.app.get('mysql');
+        console.log(req.body)
+        console.log(req.params.id)
+        var sql = "UPDATE Games SET title=?, genre=?, publishers=? WHERE gameID=?";
+        var inserts = [req.body.title, req.body.genre, req.body.publishers, req.params.gameID];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });    
+    
+    //deletes a game entry
+    router.delete('/:gameID', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Games WHERE gameID = ?";
+        var inserts = [req.params.gameID];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        })
+    })
 
     return router;
 }();
