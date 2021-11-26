@@ -1,16 +1,18 @@
 <html>
-<h1>Update {{players.firstName}} {{players.lastName}}:</h1>
+<h1>Update {{player.firstName}} {{player.lastName}}:</h1>
 <form id="update-person" action="/players" method="post">
-    Email: <input type="text" name="email" value="{{players.email}}"><br>
-    First Name: <input type="text" name="firstName" value="{{players.firstName}}"><br>
-    Last Name: <input type="text" name="lastName" value="{{players.lastName}}"><br>
-    Gamertag: <input type="text" name="gamerTag" value="{{players.gamerTag}}"><br>
+    Email: <input type="text" name="email" value="{{player.email}}"><br>
+    First Name: <input type="text" name="firstName" value="{{player.firstName}}"><br>
+    Last Name: <input type="text" name="lastName" value="{{player.lastName}}"><br>
+    Gamertag: <input type="text" name="gamerTag" value="{{player.gamerTag}}"><br>
     Employer: <select name="employer" id="employer-selector">
     {{#each employer}}
         <option value="{{publisherID}}">{{publisherName}}</option>
     {{/each}}
 </select><br>
 </form>
-<button onclick="updatePlayer({{players.playerID}})">Update</button>
+<button onclick="updatePlayer({{player.playerID}})">Update</button>
+/*
 <script defer>selectPlanet({{person.homeworld}});</script>
+*/
 </html>
