@@ -1,0 +1,12 @@
+<html>
+<h1>Update {{game.title}}:</h1>
+<form id="update-game" action="/games" method="post">
+    Title: <input type="text" name="title" value="{{game.title}}"><br>
+    Genre: <input type="text" name="genre" value="{{game.genre}}"><br>
+    Publisher: <select name="publisher" id="publisher-selector">
+    {{#each publisher}}
+        <option value="{{publisherID}}">{{publisherName}}</option>
+    {{/each}}
+</form>
+<button onclick="updateGame({{game.gameID}})">Update</button>
+</html>
