@@ -54,7 +54,8 @@ module.exports = function() {
             complete();
         });
     }
-
+    
+    //displays all players
     router.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
@@ -69,12 +70,21 @@ module.exports = function() {
             }
         }
     });
-
+    
+    //adds a new player
     router.post('/', function(req, res){
         console.log(req.body)
+        var employer;
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Players (email, firstName, lastName, gamerTag, employer) VALUES (?,?,?,?,?)";
-        var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.gamerTag, req.body.employer];
+
+        if(req.body.employer === '') {
+            employer = null;
+        } else {
+            employer = req.body.employer;
+        }
+
+        var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.gamerTag, employer];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
@@ -85,7 +95,8 @@ module.exports = function() {
             }
         });
     });
-
+    
+    //search player by gamertag
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -101,6 +112,7 @@ module.exports = function() {
         }
     });
     
+    //route for update player page
     router.get('/:playerID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -117,6 +129,7 @@ module.exports = function() {
         }
     });
 
+    //updates player entry
     router.put('/:playerID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log(req.body)
@@ -134,7 +147,8 @@ module.exports = function() {
             }
         });
     });
-    
+
+    //delets player from table
     router.delete('/:playerID', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Players WHERE playerID = ?";
