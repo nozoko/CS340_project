@@ -6,6 +6,7 @@
     Last Name: <input type="text" name="lastName" value="{{player.lastName}}"><br>
     Gamertag: <input type="text" name="gamerTag" value="{{player.gamerTag}}"><br>
     Employer: <select name="employer" id="employer-selector">
+    <option value="{{NULL}}">No Employer</option>
     {{#each employer}}
         <option value="{{publisherID}}">{{publisherName}}</option>
     {{/each}}
