@@ -22,9 +22,9 @@
 </table>
 
 <form id="addGame" action="/games" method="post">
-    title: <input type="text" name="title"><br>
-    genre: <input type="text" name="genre"><br>
-    publisher: <select name="publisher">
+    Title: <input type="text" name="title"><br>
+    Genre: <input type="text" name="genre"><br>
+    Publisher: <select name="publisher">
     {{#each publisher}}
         <option value="{{publisherID}}">{{publisherName}}</option>
     {{/each}}
