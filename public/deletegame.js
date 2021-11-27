@@ -1,7 +1,7 @@
 
 function deleteGame(gameID){
     $.ajax({
-        url: '/players/' + gameID,
+        url: '/games/' + gameID,
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);
