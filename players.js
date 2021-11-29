@@ -131,6 +131,7 @@ module.exports = function() {
 
     //updates player entry
     router.put('/:playerID', function(req, res){
+        var employer;
         var mysql = req.app.get('mysql');
         console.log(req.body)
         console.log(req.params.id)
@@ -142,7 +143,7 @@ module.exports = function() {
             employer = req.body.employer;
         }
         
-        var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.gamerTag, req.body.employer, req.params.playerID];
+        var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.gamerTag, employer, req.params.playerID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(error)
