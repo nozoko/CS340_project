@@ -135,6 +135,13 @@ module.exports = function() {
         console.log(req.body)
         console.log(req.params.id)
         var sql = "UPDATE Players SET email=?, firstName=?, lastName=?, gamerTag=?, employer=? WHERE playerID=?";
+        
+        if(req.body.employer === '') {
+            employer = null;
+        } else {
+            employer = req.body.employer;
+        }
+        
         var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.gamerTag, req.body.employer, req.params.playerID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
