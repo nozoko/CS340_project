@@ -36,8 +36,8 @@
 				<td>{{manufacturer}}</td>
 				<td>{{launchYear}}</td>
 				<td><a href="/games">see games</a></td>
-				<td><button class="editbtn" title="click to edit entry" onclick="location.href='/platforms/edit?platform={{platformID}}';">edit</button></td>
-				<td><button class="removebtn" title="click to remove entry"  onclick="location.href='/platforms/delete?platform={{platformID}}';">remove</button></td>
+				<td><button class="editbtn" title="click to edit entry" onclick="location.href='/platforms/edit?id={{platformID}}';">edit</button></td>
+				<td><button class="removebtn" title="click to remove entry"  onclick="location.href='/platforms/delete?id={{platformID}}';">remove</button></td>
 			</tr>
 		{{/each}}
 		</tbody>
