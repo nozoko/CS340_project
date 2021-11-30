@@ -104,7 +104,7 @@ module.exports = function() {
         console.log(req.body)
         console.log(req.params.id)
         var sql = "UPDATE Games SET title=?, genre=?, publishers=? WHERE gameID=?";
-        var inserts = [req.body.title, req.body.genre, req.body.publishers, req.params.gameID];
+        var inserts = [req.body.title, req.body.genre, req.body.publisher, req.params.gameID];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 console.log(error)
