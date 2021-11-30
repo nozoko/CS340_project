@@ -62,13 +62,13 @@ module.exports = function() {
     router.get('/edit', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
-        var editID = req.query.publisher;
         var mysql = req.app.get('mysql');
-        res.render('publisherEdit', context);
-        getPublishers(res, mysql, context, complete);
+        getPublishers(req, res, mysql, context, complete);
+        getGames(res, mysql, context, complete);
+        getPlayers(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 1) {
+            if (callbackCount >= 3) {
                 res.render('publisherEdit', context);
             }
         }
@@ -76,7 +76,7 @@ module.exports = function() {
     
     router.get('/delete', function (req, res, next) {
         var callbackCount = 0;
-        var editID = req.query.publisher;
+        var editID = req.query.id;
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Publishers WHERE publisherID = " + editID;
         sql = mysql.pool.query(sql, function(error, results, fields){
@@ -105,10 +105,24 @@ module.exports = function() {
     });
 
     router.post('/add', function(req, res){
-        console.log(req.body)
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Publishers (publisherName, headquarters) VALUES (?,?)";
         var inserts = [req.body.publisherName, req.body.headquarters];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/publishers');
+            }
+        });
+    });
+    
+    router.post('/edit', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Publishers SET publisherName = ?, headquarters = ? WHERE publisherID = ?";
+        var inserts = [req.body.publisherName, req.body.headquarters, req.body.publisherID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))

@@ -1,0 +1,22 @@
+<html lang="en">
+<h3>Edit Platform</h3>
+<form id="editPlatform" action="/platforms/edit" method="post">
+			{{#each platforms}}
+			<input type="text" name="platformID" value="{{platformID}}" hidden>
+            name: <input type="text" name="systemName" value="{{systemName}}"><br>
+            manufacturer: <input type="text" name="manufacturer" value="{{manufacturer}}"><br>
+            launch year: <input type="date" name="launchYear" value="{{launchYear}}"><br>
+			{{/each}}
+            games: <select name="games">
+            {{#each games}}
+                <option value="{{gameID}}">{{title}}</option>
+            {{/each}}
+</select><br>
+            <input type="submit" value="Submit">
+</form>
+
+<br>
+<p>Functionality for adding relationships between games and platforms through this menu not yet implemented</p>
+
+</body>
+</html>

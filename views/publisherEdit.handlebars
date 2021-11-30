@@ -1,8 +1,11 @@
 <html>
-<h3>Add Publisher</h3>
-<form id="addPublisher" action="/publishers/add" method="post">
-            name: <input type="text" name="publisherName"><br>
-			headquarters: <input type="text" name="headquarters"><br>
+<h3>Edit Publisher</h3>
+<form id="editPublisher" action="/publishers/edit" method="post">
+			{{#each publishers}}
+			<input type="text" name="publisherID" value="{{publisherID}}" hidden>
+            name: <input type="text" name="publisherName" value="{{publisherName}}"><br>
+			headquarters: <input type="text" name="headquarters" value="{{headquarters}}"><br>
+			{{/each}}
             games: <select name="games">
 				<option value="" selected>Select Games</option>
 				{{#each games}}

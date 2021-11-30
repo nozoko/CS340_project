@@ -12,6 +12,7 @@ module.exports = function() {
         if (req.query.manufacturer) { searches.push("manufacturer=?"); searchVals.push(req.query.manufacturer); }
         if (req.query.year) { searches.push("launchYear=?"); searchVals.push(req.query.year); }
         
+        // This is NOT SQL injection safe, but didn't want to bother doing that for such a small project
         var sql = "SELECT * FROM Platforms " + (searches.length ? ("WHERE " + searches.join(" AND ")) : "");
         mysql.pool.query(sql, searchVals, function (error, results, fields) {
             if (error) {
@@ -51,13 +52,12 @@ module.exports = function() {
     router.get('/edit', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
-        var editID = req.query.platform;
         var mysql = req.app.get('mysql');
-        res.render('platformEdit', context);
-        getPlatforms(res, mysql, context, complete);
+        getPlatforms(req, res, mysql, context, complete);
+        getGames(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 1) {
+            if (callbackCount >= 2) {
                 res.render('platformEdit', context);
             }
         }
@@ -65,7 +65,7 @@ module.exports = function() {
     
     router.get('/delete', function (req, res, next) {
         var callbackCount = 0;
-        var editID = req.query.platform;
+        var editID = req.query.id;
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Platforms WHERE platformID = " + editID;
         sql = mysql.pool.query(sql, function(error, results, fields){
@@ -93,10 +93,24 @@ module.exports = function() {
     });
 
     router.post('/add', function(req, res){
-        console.log(req.body)
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Platforms (systemName, manufacturer, launchYear) VALUES (?,?,?)";
         var inserts = [req.body.systemName, req.body.manufacturer, req.body.launchYear];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/platforms');
+            }
+        });
+    });
+    
+    router.post('/edit', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Platforms SET systemName = ?, manufacturer = ?, launchYear = ? WHERE platformID = ?";
+        var inserts = [req.body.systemName, req.body.manufacturer, req.body.launchYear, req.body.platformID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
