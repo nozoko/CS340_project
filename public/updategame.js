@@ -1,6 +1,6 @@
 function updateGame(gameID){
     $.ajax({
-        url: '/gamess/' + gameID,
+        url: '/games/' + gameID,
         type: 'PUT',
         data: $('#update-game').serialize(),
         success: function(result){
