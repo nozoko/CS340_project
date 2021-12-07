@@ -1,0 +1,34 @@
+<html>
+<h3>Platform Game Libraries</h3>
+<table>
+    <thead>
+    <th>Platform ID</th>
+    <th>Game ID</th>
+    </thead>
+    <tbody>
+    {{#each platformsAndGames}}
+        <tr>
+            <td>{{platformID}}</td>
+            <td>{{gameID}}</td>
+			<td><button onclick="deleteEntry({{playerID}})">Delete</button></td>
+            <td><a href="/playersGames/{{playerID}}">Update</a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<form id="addPlatformsGames" action="/platformsGames" method="post">
+    System Name: <select name="systemName">
+    {{#each platforms}}
+        <option value="{{platformID}}">{{systemName}}</option>
+    {{/each}}
+    </select><br>
+    Title: <select name= "titles">
+    {{#each titles}}
+        <option value="{{gameID}}">{{title}}</option>
+    {{/each}}
+    </select><br>
+    <input type="submit" value="Submit">
+</form>
+
+</html>

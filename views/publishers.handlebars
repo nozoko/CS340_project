@@ -1,44 +1,31 @@
 <html>
     <h3>Publishers Table</h3>
+	<form id='search_publisher' action="/publishers/search" method="post">
     <table>
         <thead>
             <th>Search</th>
         </thead>
 		<tbody>
 			<tr>
-				<td><input type="text" name="searchName" size="10" value=""></td>
-				<td><input type="text" name="searchHQ" size="10" value=""></td>
-				<td><select id="games-multi-select" multiple>
-					<option value="" selected>Select Games</option>
-					{{#each games}}
-					<option value="{{gameID}}">{{title}}</option>
-					{{/each}}
-				</select></td>
-				<td><select id="employees-multi-select" multiple>
-					<option value="" selected>Select Employees</option>
-					{{#each players}}
-					<option value="{{playerID}}">{{firstName}}</option>
-					{{/each}}
-				</select></td>
-				<td><button class="searchbtn" title="click to search with given fields">Search</button></td>
+				<td><input type="text" name="publisherName" size="10" value=""></td>
+				<td><input type="text" name="headquarters" size="10" value=""></td>
+				<td></td>
+				<td><input type="submit" value="Search"></td>
 			</tr>
 		</tbody>
     </table>
+	</form>
     <br>
     <table>
         <thead>
             <th>Name</th>
             <th>Headquarters</th>
-            <th>Published Games</th>
-            <th>Employees</th>
         </thead>
 		<tbody>
 		{{#each publishers}}
 			<tr>
 				<td>{{publisherName}}</td>
 				<td>{{headquarters}}</td>
-				<td><a href="/games">see games</a></td>
-				<td><a href="/players">see employees</a></td>
 				<td><button class="editbtn" title="click to edit entry" onclick="location.href='/publishers/edit?id={{publisherID}}';">edit</button></td>
 				<td><button class="removebtn" title="click to remove entry"  onclick="location.href='/publishers/delete?id={{publisherID}}';">remove</button></td>
 			</tr>
