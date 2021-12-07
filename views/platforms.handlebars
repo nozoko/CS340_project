@@ -1,33 +1,28 @@
 <html>
 
     <h3>Platforms Table</h3>
-
+	<form id='search_platform' action="/platforms/search" method="post">
     <table>
         <thead>
             <th>Search</th>
         </thead>
 		<tbody>
 			<tr>
-				<td><input type="text" name="searchName" size="10" value=""></td>
-				<td><input type="text" name="searchManu" size="10" value=""></td>
-				<td><input type="date" name="searchYear" size="10" value=""></td>
-				<td><select id="games-multi-select" multiple>
-					<option value="" selected>Select Games</option>
-					{{#each games}}
-					<option value="{{gameID}}">{{title}}</option>
-					{{/each}}
-				</select></td>
-				<td><button class="searchbtn" title="click to search with given fields">Search</button></td>
+				<td><input type="text" name="systemName" size="10" value=""></td>
+				<td><input type="text" name="manufacturer" size="10" value=""></td>
+				<td><input type="date" name="launchYear" size="10" value=""></td>
+				<td></td>
+				<td><input type="submit" value="Search"></td>
 			</tr>
 		</tbody>
     </table>
+	</form>
     <br>
     <table>
         <thead>
             <th>Name</th>
             <th>Manufacturer</th>
             <th>Launch Year</th>
-            <th>Games</th>
         </thead>
 		<tbody>
 		{{#each platforms}}
@@ -35,7 +30,6 @@
 				<td>{{systemName}}</td>
 				<td>{{manufacturer}}</td>
 				<td>{{launchYear}}</td>
-				<td><a href="/games">see games</a></td>
 				<td><button class="editbtn" title="click to edit entry" onclick="location.href='/platforms/edit?id={{platformID}}';">edit</button></td>
 				<td><button class="removebtn" title="click to remove entry"  onclick="location.href='/platforms/delete?id={{platformID}}';">remove</button></td>
 			</tr>

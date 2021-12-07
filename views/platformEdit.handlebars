@@ -7,11 +7,15 @@
             manufacturer: <input type="text" name="manufacturer" value="{{manufacturer}}"><br>
             launch year: <input type="date" name="launchYear" value="{{launchYear}}"><br>
 			{{/each}}
-            games: <select name="games">
-            {{#each games}}
-                <option value="{{gameID}}">{{title}}</option>
-            {{/each}}
-</select><br>
+             <!--- Checkbox multi select code from https://stackoverflow.com/questions/19206919/how-to-create-checkbox-inside-dropdown --->
+            games: <div id="games-multi-select" class="checkbox-div" tabindex="100">
+				<span class="checkbox-main">Select Games</span>
+				<ul class="checkbox-items">
+				{{#each games}}
+					<li> <input type="checkbox" name="gamesInput" value="{{gameID}}">{{title}}</li>
+				{{/each}}
+				</ul>
+			</div></td><br>
             <input type="submit" value="Submit">
 </form>
 

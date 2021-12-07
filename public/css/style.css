@@ -82,3 +82,56 @@ table tr td:nth-last-child(2){
 .removebtn:hover{
     background-color: #b8ffb8;
 }
+
+/* CSS for dropdown with checkboxes, taken from https://stackoverflow.com/questions/19206919/how-to-create-checkbox-inside-dropdown */
+.checkbox-div {
+  display: inline-block;
+}
+
+.checkbox-div .checkbox-main {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 50px 5px 10px;
+  border: 1px solid #ccc;
+}
+
+.checkbox-div .checkbox-main:after {
+  position: absolute;
+  content: "";
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  padding: 5px;
+  right: 10px;
+  top: 20%;
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.checkbox-div .checkbox-main:active:after {
+  right: 8px;
+  top: 21%;
+}
+
+.checkbox-div ul.checkbox-items {
+  padding: 2px;
+  display: none;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.checkbox-div ul.checkbox-items li {
+  list-style: none;
+}
+
+.checkbox-div.visible .checkbox-main {
+  color: #0094ff;
+}
+
+.checkbox-div.visible .checkbox-items {
+  display: block;
+}

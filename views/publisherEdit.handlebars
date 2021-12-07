@@ -6,18 +6,24 @@
             name: <input type="text" name="publisherName" value="{{publisherName}}"><br>
 			headquarters: <input type="text" name="headquarters" value="{{headquarters}}"><br>
 			{{/each}}
-            games: <select name="games">
-				<option value="" selected>Select Games</option>
+            <!--- Checkbox multi select code from https://stackoverflow.com/questions/19206919/how-to-create-checkbox-inside-dropdown --->
+            games: <div id="games-multi-select" class="checkbox-div" tabindex="100">
+				<span class="checkbox-main">Select Games</span>
+				<ul class="checkbox-items">
 				{{#each games}}
-                <option value="{{gameID}}">{{title}}</option>
+					<li> <input type="checkbox" name="gamesInput" value="{{gameID}}">{{title}}</li>
 				{{/each}}
-			</select></td><br>
-			employees: <select id="employees-multi-select" multiple>
-				<option value="" selected>Select Employees</option>
+				</ul>
+			</div></td><br>
+			<!--- Checkbox multi select code from https://stackoverflow.com/questions/19206919/how-to-create-checkbox-inside-dropdown --->
+			employees: <div id="employees-multi-select" class="checkbox-div" tabindex="100">
+				<span class="checkbox-main">Select Employees</span>
+				<ul class="checkbox-items">
 				{{#each players}}
-				<option value="{{playerID}}">{{firstName}}</option>
+					<li> <input type="checkbox" name="employeesInput" value="{{playerID}}">{{firstName}} {{lastName}}</li>
 				{{/each}}
-			</select></td>
+				</ul>
+			</div></td>
 </select><br>
             <input type="submit" value="Submit">
 </form>
